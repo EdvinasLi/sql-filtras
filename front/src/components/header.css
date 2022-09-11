@@ -1,10 +1,56 @@
-.headerMain {
+@import url("https://fonts.googleapis.com/css2?family=Combo&display=swap");
+
+.headerLogo {
+  font-family: "Combo", cursive;
+  font-size: 2.5rem;
+  color: #fff;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   width: 100%;
-  height: 100px;
-  background-color: rgb(150, 192, 71);
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 0.5rem #000;
 }
-.headerMain ul {
+.headerLogo a {
+  text-decoration: none;
+  color: #fff;
+}
+.headerMainBody {
+  background-color: #e8ae9c;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  height: 200px;
+  width: 100%;
+}
+
+.headerRight {
+  display: flex;
+  width: 100%;
+}
+
+.headerContent {
+  height: 50px;
+  width: 100%;
+}
+.linkai {
+  flex: 3;
+}
+.login {
+  flex: 1;
+}
+
+.linkai ul {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+}
+.login ul {
+  display: flex;
+  list-style: none;
+  gap: 10px;
 }

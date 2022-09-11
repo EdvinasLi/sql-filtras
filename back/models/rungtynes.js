@@ -10,7 +10,19 @@ const Rungtynes = (sequelize) => {
       type: DataTypes.STRING, //=VARCHAR(255)
       allowNull: false, //neleidžiamas tuščias laukas - Standartinė reikšmė true
     },
-    points: {
+    team1: {
+      type: DataTypes.CHAR, //= TEXT
+      allowNull: false,
+    },
+    team2: {
+      type: DataTypes.CHAR, //= TEXT
+      allowNull: false,
+    },
+    team1_points: {
+      type: DataTypes.CHAR, //= TEXT
+      allowNull: false,
+    },
+    team2_points: {
       type: DataTypes.CHAR, //= TEXT
       allowNull: false,
     },

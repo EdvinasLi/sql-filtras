@@ -63,7 +63,8 @@ export const matchValidator = (req, res, next) => {
   const schema = Joi.object({
     start_date: Joi.string().min(3).max(50).required(),
     end_date: Joi.string().min(3).max(50).required(),
-    points: Joi.string().required(),
+    team1: Joi.string().required(),
+    team2: Joi.string().required(),
   });
   validate(schema, req, res, next);
 };

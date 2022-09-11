@@ -3,6 +3,7 @@ import cors from "cors";
 import irasai from "./control/irasai.js";
 import vartotojai from "./control/vartotojai.js";
 import session from "express-session";
+import points from "./control/points.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(
 //Priskiriame posts kontrolerį
 app.use("/api/irasai/", irasai);
 app.use("/api/vartotojai/", vartotojai);
+app.use("/api/points/", points);
 
 //Paleidžiame serverį
 app.listen(3000);

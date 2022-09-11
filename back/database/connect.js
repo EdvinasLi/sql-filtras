@@ -3,6 +3,7 @@ import mysql from "mysql2/promise";
 import Rungtynes from "../models/rungtynes.js";
 import Teams from "../models/teams.js";
 import Vartotojai from "../models/vartotojai.js";
+import Points from "../models/points.js";
 
 const database = {};
 const credentials = {
@@ -33,8 +34,15 @@ try {
   database.Teams = Teams(sequelize);
   database.Vartotojai = Vartotojai(sequelize);
   database.Rungtynes = Rungtynes(sequelize);
+  database.Points = Points(sequelize);
 
-  await sequelize.sync({ alter: false });
+  database.Rungtynes.hasMany(database.Points);
+  database.Points.belongsTo(database.Rungtynes);
+
+  database.Rungtynes.hasMany(database.Teams);
+  database.Teams.belongsTo(database.Rungtynes);
+
+  await sequelize.sync({ alter: true });
 } catch (error) {
   console.log(error);
   console.log("Nepavyko prisijungti prie duomenų bazės");

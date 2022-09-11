@@ -8,6 +8,7 @@ const Addteam = () => {
     logo: "",
     tournament_name: "",
   });
+
   const handleForm = (e) => {
     setTeam({
       ...team,
@@ -34,6 +35,7 @@ const Addteam = () => {
         console.log(err);
       });
   };
+
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -47,6 +49,7 @@ const Addteam = () => {
           name="tournament_name"
           onChange={(e) => handleForm(e)}
         />
+
         <button>Prideti</button>
       </form>
     </div>

@@ -5,6 +5,8 @@ import Homepage from "./pages/homepage.js";
 import Login from "./pages/login.js";
 import Register from "./pages/register.js";
 import Addteam from "./pages/addteam.js";
+import Addmatch from "./pages/addmatch.js";
+import Match from "./pages/match";
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />)
         <Route path="/registracija" element={<Register />} />)
         <Route path="/addteam" element={<Addteam />} />)
+        <Route path="/addmatch" element={<Addmatch />} />)
+        <Route path="/match/:id" element={<Match />} />)
       </Routes>
     </BrowserRouter>
   );

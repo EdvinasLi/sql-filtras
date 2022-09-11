@@ -26,14 +26,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const post = await db.Posts.findByPk(req.params.id);
-    res.json(post);
-  } catch (error) {
-    res.status(500).send({ message: "Įvyko serverio klaida" });
-  }
-});
 //naujas irasas
 router.post(
   "/",
@@ -57,7 +49,7 @@ router.post(
   "/match/",
 
   // auth,
-  matchValidator,
+
   async (req, res) => {
     try {
       if (req.file) {
@@ -67,6 +59,31 @@ router.post(
       res.json({ message: "Rungtyniu irasas sekmingai sukurtas" });
     } catch (error) {
       res.status(500).send({ message: "Įvyko serverio klaida" });
+    }
+  }
+);
+router.get("/match/:id", async (req, res) => {
+  try {
+    const post = await db.Rungtynes.findByPk(req.params.id);
+    res.json(post);
+  } catch {
+    res.status(500).send("Įvyko serverio klaida");
+  }
+});
+
+router.get(
+  "/match/",
+
+  // auth,
+  // matchValidator,
+  async (req, res) => {
+    try {
+      const match = await db.Rungtynes.findAll();
+
+      res.json(match);
+    } catch (error) {
+      // res.status(500).send({ message: "Įvyko serverio klaida" });
+      console.log(error);
     }
   }
 );
