@@ -47,11 +47,13 @@ export default function Match() {
       time: "00:00",
     };
     console.log(data);
-
+  
     axios
       .post("/api/points/", data)
-      .then((resp) => console.log(resp))
-      .catch((error) => console.log(error));
+      .then((resp) =>      window.location.reload())
+      .catch((error) => console.log(error)
+      );
+    
   };
   return (
     <div className="matchBody">
