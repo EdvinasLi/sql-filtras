@@ -26,6 +26,7 @@
   flex-direction: row;
   height: 200px;
   width: 100%;
+  font-family: "Oswald", sans-serif;
 }
 
 .headerRight {
@@ -52,5 +53,30 @@
 .login ul {
   display: flex;
   list-style: none;
-  gap: 10px;
+  gap: 100px;
+}
+
+.login li a {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+.linkai li a {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.linkai a:hover {
+  color: #fff;
+  background-color: #eec3b6;
+  border-radius: 6px 6px 6px 6px;
+  transition: ease-in-out 0.2s;
+}
+
+.login a:hover {
+  color: #fff;
+  background-color: #eec3b6;
+  border-radius: 6px 6px 6px 6px;
+  transition: ease-in-out 0.2s;
 }

@@ -34,4 +34,4 @@ app.use("/api/vartotojai/", vartotojai);
 app.use("/api/points/", points);
 
 //Paleidžiame serverį
-app.listen(3000);
+app.listen(5000);

@@ -33,11 +33,19 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     await db.Points.create(req.body);
-    const match = await db.Rungtynes.findByPk(req.body.rungtynesId);
-    console.log(match);
-    await match.update({
-      team1_points: match.team1_points + req.body.points,
-    });
+    const match = await db.Rungtynes.findByPk(req.body.RungtyneId);
+    if (match.team1 === req.body.team) {
+      await match.update({
+        team1_points: parseInt(match.team1_points) + parseInt(req.body.points),
+      });
+    }
+
+    if (match.team2 === req.body.team) {
+      await match.update({
+        team2_points: parseInt(match.team2_points) + parseInt(req.body.points),
+      });
+    }
+
     console.log(req.body);
     res.json({ message: "Taskai sekmingai prideti" });
   } catch (error) {

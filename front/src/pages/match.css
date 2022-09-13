@@ -1,0 +1,17 @@
+.matchCard {
+  display: flex;
+  border: 2px solid black;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.versus {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+.matchBody {
+  margin-top: 10px;
+}

@@ -8,42 +8,87 @@ import { Op } from "sequelize";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const options = {};
-  if (req.query.order) options.order = [(options.order = ["title", "DESC"])];
-
+router.get('/matches/', async (req, res) => {
   try {
-    const posts = await db.Teams.findAll(options);
-    res.json(posts);
-  } catch {
-    //Pirmas variantas grąžinti tik statusą
-    //res.status(500).end()
+    let matches = await db.Rungtynes.findAll();
+    matches = await Promise.all(matches.map(async match => {
+      const teamOne = await db.Teams.findOne({
+        where: { team_name: match.team1 },
+      });
+      const teamTwo = await db.Teams.findOne({
+        where: { team_name: match.team2 },
+      });
+      match.team1 = teamOne;
+      match.team2 = teamTwo;
 
-    //Antras variantas grąžinti tik statusą
-    //res.sendStatus(500)
-
+      return match
+    }))
+    res.json(matches);
+  } catch (error) {
     res.status(500).send({ message: "Įvyko serverio klaida" });
+    console.log(error);
+  }
+})
+
+router.get("/match/:id", async (req, res) => {
+  try {
+    const match = await db.Rungtynes.findByPk(req.params.id);
+
+    const teamOne = await db.Teams.findOne({
+      where: { team_name: match.team1 },
+    });
+    const teamTwo = await db.Teams.findOne({
+      where: { team_name: match.team2 },
+    });
+
+    match.team1 = teamOne;
+    match.team2 = teamTwo;
+    res.json(match);
+  } catch {
+    res.status(500).send("Įvyko serverio klaida");
   }
 });
 
+// router.get("/", async (req, res) => {
+//   try {
+//     const teamOne = await db.Teams.findOne({
+//       where: { team_name: req.body.team1 },
+//     });
+//     const teamTwo = await db.Teams.findOne({
+//       where: { team_name: req.body.team2 },
+//     });
+//     res.json({ teamOne, teamTwo });
+//   } catch (error) {
+//     //Pirmas variantas grąžinti tik statusą
+//     //res.status(500).end()
+
+//     //Antras variantas grąžinti tik statusą
+//     //res.sendStatus(500)
+
+//     res.status(500).send({ message: "Įvyko serverio klaida" });
+//     console.log(error);
+//   }
+// });
+
 //naujas irasas
-router.post(
-  "/",
-  upload.single("image"),
-  // auth,
-  teamsValidator,
-  async (req, res) => {
-    try {
-      if (req.file) {
-        req.body.image = "/uploads/" + req.file.filename;
-      }
-      new db.Teams(req.body).save();
-      res.json({ message: "Komandos irasas sekmingai sukurtas" });
-    } catch (error) {
-      res.status(500).send({ message: "Įvyko serverio klaida" });
-    }
-  }
-);
+// router.post(
+//   "/",
+//   upload.single("image"),
+//   // auth,
+//   teamsValidator,
+//   async (req, res) => {
+//     try {
+//       if (req.file) {
+//         req.body.image = "/uploads/" + req.file.filename;
+//       }
+//       new db.Teams(req.body).save();
+//       res.json({ message: "Komandos irasas sekmingai sukurtas" });
+//     } catch (error) {
+//       res.status(500).send({ message: "Įvyko serverio klaida" });
+//       console.log(error);
+//     }
+//   }
+// );
 
 router.post(
   "/match/",
@@ -62,14 +107,6 @@ router.post(
     }
   }
 );
-router.get("/match/:id", async (req, res) => {
-  try {
-    const post = await db.Rungtynes.findByPk(req.params.id);
-    res.json(post);
-  } catch {
-    res.status(500).send("Įvyko serverio klaida");
-  }
-});
 
 router.get(
   "/match/",

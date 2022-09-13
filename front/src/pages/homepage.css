@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap");
+
 .row {
   display: flex;
   flex-direction: column;
@@ -15,4 +17,11 @@
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+  border: 2px solid black;
+  border-radius: 6px 6px 6px 6px;
+}
+.body {
+  column-count: 2;
+  column-gap: 20px;
+  font-family: "Oswald", sans-serif;
 }
